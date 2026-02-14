@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_z_comerce/features/cart/presentation/bloc/cubit/cart_cubit.dart';
+import 'package:smart_z_comerce/features/cart/presentation/pages/checkout_page.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -30,43 +31,133 @@ class CartPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final item = cartItems[index];
 
-                    return ListTile(
-                      leading: Image.network(item.product.image, width: 50),
-                      title: Text(item.product.title),
+                    return Dismissible(
+                      key: ValueKey(item.product.id),
 
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("\$${item.product.price}"),
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.remove),
-                                onPressed: () {
-                                  context.read<CartCubit>().decreaseQuantity(
-                                    item.product,
-                                  );
-                                },
+                      direction:
+                          DismissDirection.endToStart, // 👉 derecha → izquierda
+
+                      confirmDismiss: (_) async {
+                        return await showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            title: const Text("Eliminar producto"),
+                            content: const Text(
+                              "¿Seguro que deseas eliminarlo del carrito?",
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, false),
+                                child: const Text("Cancelar"),
                               ),
-                              Text(item.quantity.toString()),
-                              IconButton(
-                                icon: const Icon(Icons.add),
-                                onPressed: () {
-                                  context.read<CartCubit>().increaseQuantity(
-                                    item.product,
-                                  );
-                                },
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, true),
+                                child: const Text("Eliminar"),
                               ),
                             ],
                           ),
-                        ],
+                        );
+                      },
+
+                      onDismissed: (_) {
+                        context.read<CartCubit>().removeProduct(item.product);
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("${item.product.title} eliminado"),
+                          ),
+                        );
+                      },
+
+                      background: Container(
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        color: Colors.red,
+                        child: const Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                          size: 30,
+                        ),
                       ),
 
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.red),
-                        onPressed: () {
-                          context.read<CartCubit>().removeProduct(item.product);
-                        },
+                      child: ListTile(
+                        leading: Image.network(item.product.image, width: 50),
+
+                        title: Text(item.product.title),
+
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("\$${item.product.price}"),
+
+                            Row(
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.remove),
+                                  onPressed: () {
+                                    context.read<CartCubit>().decreaseQuantity(
+                                      item.product,
+                                    );
+                                  },
+                                ),
+
+                                Text(item.quantity.toString()),
+
+                                IconButton(
+                                  icon: const Icon(Icons.add),
+                                  onPressed: () {
+                                    context.read<CartCubit>().increaseQuantity(
+                                      item.product,
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.red),
+                          onPressed: () async {
+                            final confirm = await showDialog<bool>(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                title: const Text("Eliminar producto"),
+                                content: const Text(
+                                  "¿Seguro que deseas eliminar este producto del carrito?",
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, false),
+                                    child: const Text("Cancelar"),
+                                  ),
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, true),
+                                    child: const Text("Eliminar"),
+                                  ),
+                                ],
+                              ),
+                            );
+
+                            if (!context.mounted)
+                              return; //elimina el mensaje:  Don't use 'BuildContext's across async gaps. Try rewriting the code to not use the 'BuildContext', or guard the use with a 'mounted'
+                            if (confirm == true) {
+                              context.read<CartCubit>().removeProduct(
+                                item.product,
+                              );
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    "${item.product.title} eliminado",
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                        ),
                       ),
                     );
                   },
@@ -87,7 +178,14 @@ class CartPage extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const CheckoutPage(),
+                            ),
+                          );
+                        },
                         child: const Text("Finalizar compra"),
                       ),
                     ),

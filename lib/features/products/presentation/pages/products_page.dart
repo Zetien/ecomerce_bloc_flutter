@@ -16,36 +16,35 @@ class ProductsPage extends StatelessWidget {
         actions: [
           BlocBuilder<CartCubit, CartState>(
             builder: (context, state) {
-              final cartItems = state.items;
+              final count = state.items.fold<int>(
+                0,
+                (sum, item) => sum + item.quantity,
+              );
 
               return Stack(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.shopping_cart, size: 35,),
+                    icon: const Icon(Icons.shopping_cart),
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => const CartPage(),
-                        ),
+                        MaterialPageRoute(builder: (_) => const CartPage()),
                       );
                     },
                   ),
-                  if (cartItems.isNotEmpty)
+
+                  if (count > 0)
                     Positioned(
-                      right: 8,
-                      top: 8,
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: const BoxDecoration(
-                          color: Colors.red,
-                          shape: BoxShape.circle,
-                        ),
+                      right: 6,
+                      top: 6,
+                      child: CircleAvatar(
+                        radius: 10,
+                        backgroundColor: Colors.red,
                         child: Text(
-                          cartItems.length.toString(),
+                          count.toString(),
                           style: const TextStyle(
-                            color: Colors.white,
                             fontSize: 12,
+                            color: Colors.white,
                           ),
                         ),
                       ),
