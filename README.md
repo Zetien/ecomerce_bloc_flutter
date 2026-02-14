@@ -26,17 +26,17 @@ Este proyecto simula una tienda online completa: listado de productos, detalle, 
 
 El proyecto sigue una arquitectura inspirada en Clean Architecture organizada por features:
 
-lib/
-├── features/
-│ ├── products/
-│ │ ├── data/
-│ │ ├── domain/
-│ │ └── presentation/
-│ └── cart/
-│ ├── domain/
-│ └── presentation/
-├── core/
-└── main.dart
+- lib/
+- ├── features/
+- │ ├── products/
+- │ │ ├── data/
+- │ │ ├── domain/
+- │ │ └── presentation/
+- │ └── cart/
+- │ ├── domain/
+- │ └── presentation/
+- ├── core/
+- └── main.dart
 
 
 ---
