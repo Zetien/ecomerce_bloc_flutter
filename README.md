@@ -1,30 +1,30 @@
 # 🛒 Smart Z eCommerce — Flutter BLoC App
 
-Aplicación móvil de e-commerce desarrollada en Flutter utilizando arquitectura por features y manejo de estado con BLoC/Cubit.
+Mobile e-commerce application developed in Flutter using a feature-based architecture and state management with BLoC/Cubit.
 
-Este proyecto simula una tienda online completa: listado de productos, detalle, carrito de compras y checkout simulado.
-
----
-
-## 📱 Características principales
-
-✅ Consumo de API REST real  
-✅ Arquitectura por features  
-✅ Manejo de estado con BLoC y Cubit  
-✅ Lista de productos  
-✅ Detalle de producto  
-✅ Carrito de compras con cantidades  
-✅ Badge dinámico en el ícono del carrito  
-✅ Eliminación por swipe y botón  
-✅ Checkout simulado (dirección + pago)  
-✅ Resumen de compra  
-✅ UI Material 3  
+This project simulates a complete online store: product listing, product detail, shopping cart, and a simulated checkout.
 
 ---
 
-## 🧠 Arquitectura
+## 📱 Main Features
 
-El proyecto sigue una arquitectura inspirada en Clean Architecture organizada por features:
+✅ Real REST API consumption
+✅ Feature-based architecture
+✅ State management with BLoC and Cubit
+✅ Product list
+✅ Product detail
+✅ Shopping cart with quantities
+✅ Dynamic badge on cart icon
+✅ Swipe-to-delete and button removal
+✅ Simulated checkout (address + payment)
+✅ Order summary
+✅ Material 3 UI 
+
+---
+
+## 🧠 Architecture
+
+The project follows a Clean Architecture–inspired structure organized by features:
 
 - lib/
 - ├── features/
@@ -41,60 +41,60 @@ El proyecto sigue una arquitectura inspirada en Clean Architecture organizada po
 
 ---
 
-## ⚙️ Manejo de estado
+## ⚙️ State Management
 
-Se utilizan:
+The project uses:
 
-- **BLoC** → Para productos (ProductBloc)
-- **Cubit** → Para carrito (CartCubit)
+- **BLoC** → For products (ProductBloc)
+- **Cubit** → For the cart (CartCubit)
 
-Esto permite:
+This enables:
 
-✔ Separación de responsabilidades  
-✔ Escalabilidad  
-✔ Testabilidad  
-✔ Código mantenible  
-
----
-
-## 🌐 API utilizada
-
-La aplicación consume una API pública de productos para simular un e-commerce real.
+✔ Separation of responsibilities
+✔ Scalability
+✔ Testability
+✔ Maintainable code  
 
 ---
 
-## 🛍️ Funcionalidades del carrito
+## 🌐 API Used
 
-- Agregar productos
-- Incrementar cantidad
-- Disminuir cantidad
-- Eliminar producto
-- Vaciar carrito al finalizar compra
-- Cálculo automático de total
-- Badge con cantidad total de items
+The application consumes (Fake Store API) a public products API to simulate a real e-commerce environment.
 
 ---
 
-## 💳 Checkout simulado
+## 🛍️ Cart Features
 
-El flujo de compra incluye:
-
-- Dirección de envío
-- Selección de método de pago
-- Resumen del pedido
-- Simulación de procesamiento
-- Confirmación de compra
+- Add products
+- Increase quantity
+- Decrease quantity
+- Remove product
+- Clear cart after purchase
+- Automatic total calculation
+- Badge showing total item count
 
 ---
 
-## 🚀 Cómo ejecutar el proyecto
+## 💳 Simulated Checkout
 
-### Requisitos
+The purchase flow includes:
 
-- Flutter SDK instalado
-- Emulador o dispositivo físico
+- Shipping address
+- Payment method selection
+- Order summary
+- Processing simulation
+- Purchase confirmation
 
-### Pasos
+---
+
+## 🚀 How to Run the Project
+
+### Requirements
+
+- Flutter SDK installed
+- Emulator or physical device
+
+### Steps
 
 ```bash
 git clone https://github.com/Zetien/ecomerce_bloc_flutter.git
@@ -104,7 +104,7 @@ flutter run
 ```
 ---
 
-## 🧩 Tecnologías utilizadas
+## 🧩 Technologies Used
 
 - Flutter
 - Dart
@@ -114,30 +114,30 @@ flutter run
 
 ---
 
-## 🎯 Objetivo del proyecto
+## 🎯 Project Goal
 
-Este proyecto fue desarrollado como parte de un portafolio profesional para demostrar habilidades en:
+This project was developed as part of a professional portfolio to demonstrate skills in:
 
-- Desarrollo de aplicaciones móviles con Flutter
-- Arquitectura limpia
-- Manejo de estado avanzado
-- Consumo de APIs REST
-- Diseño de interfaces modernas
-- Flujo completo de e-commerce
+- Mobile app development with Flutter
+- Clean architecture
+- Advanced state management
+- REST API consumption
+- Modern UI design
+- Modern UI design
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Author
 
 Jorge Zetien
 
-Ingeniero de Sistemas — Desarrollador Flutter
+Systems Engineer — Flutter Developer
 
 ---
 
-## 📄 Licencia
+## 📄 License
 
-Proyecto de uso educativo y demostrativo.
+Educational and demonstration purposes only.
 
 
 ---
