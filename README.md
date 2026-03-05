@@ -123,7 +123,6 @@ This project was developed as part of a professional portfolio to demonstrate sk
 - Advanced state management
 - REST API consumption
 - Modern UI design
-- Modern UI design
 
 ---
 
